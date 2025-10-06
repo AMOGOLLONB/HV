@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrés Mogollón - Ingeniero de Sistemas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           ESTILOS GENERALES Y RESET
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #222;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           BARRA DE NAVEGACIÓN
+           ============================================ */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #222;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #0066ff;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #0066ff;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ============================================
+           SECCIÓN HERO / PRESENTACIÓN
+           ============================================ */
+        #presentacion {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #presentacion::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        #presentacion::after {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            bottom: -50px;
+            left: -50px;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            margin: 0 auto 2rem;
+            object-fit: cover;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 700;
+            color: white;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* ============================================
+           CONTENEDOR GENERAL DE SECCIONES
+           ============================================ */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #222;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #0066ff, #ff6600);
+            border-radius: 2px;
+        }
+
+        /* ============================================
+           SECCIÓN EXPERIENCIA
+           ============================================ */
+        #experiencia {
+            background: white;
+        }
+
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .experience-item {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .experience-item h3 {
+            color: #0066ff;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item .company {
+            color: #ff6600;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item .period {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .experience-item ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .experience-item li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .experience-item li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #0066ff;
+            font-weight: bold;
+        }
+
+        /* Sección de habilidades */
+        .skills-container {
+            margin-top: 3rem;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .skills-container h3 {
+            color: #222;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            color: white;
+        }
+
+        .skill-category h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        /* ============================================
+           SECCIÓN PROYECTOS
+           ============================================ */
+        #proyectos {
+            background: #f9f9f9;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+            align-items: stretch;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-content h3 {
+            color: #222;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-content p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .project-content .btn {
+            margin-top: auto;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: linear-gradient(90deg, #0066ff, #0052cc);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn:hover {
+            background: linear-gradient(90deg, #0052cc, #003d99);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(90deg, #ff6600, #ff5200);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(90deg, #ff5200, #e64800);
+            box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+        }
+
+        /* ============================================
+           SECCIÓN CONTACTO
+           ============================================ */
+        #contacto {
+            background: white;
+        }
+
+        .contact-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #222;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #0066ff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            text-decoration: none;
+            color: #222;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .social-link.linkedin {
+            background: linear-gradient(135deg, #0077b5, #005582);
+            color: white;
+        }
+
+        .social-link.github {
+            background: linear-gradient(135deg, #333, #000);
+            color: white;
+        }
+
+        .social-link.twitter {
+            background: linear-gradient(135deg, #1da1f2, #0d8bd9);
+            color: white;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.95rem;
+        }
+
+        /* ============================================
+           MENSAJE DE ÉXITO
+           ============================================ */
+        .success-message {
+            display: none;
+            background: linear-gradient(90deg, #00c853, #00e676);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 600;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav>
+        <ul>
+            <li><a href="#presentacion">Inicio</a></li>
+            <li><a href="#experiencia">Experiencia</a></li>
+            <li><a href="#proyectos">Proyectos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- SECCIÓN: PRESENTACIÓN -->
+    <section id="presentacion">
+        <div class="hero-content">
+            <!-- Avatar con iniciales (simulando imagen) -->
+            <div class="avatar">AM</div>
+            <h1>Andrés Mogollón</h1>
+            <p class="subtitle">Ingeniero de Sistemas</p>
+            <p class="description">
+                Profesional en Ingeniería de Sistemas con experiencia en desarrollo de soluciones tecnológicas, 
+                análisis de datos y automatización de procesos. Apasionado por la innovación y el uso de herramientas 
+                modernas para resolver problemas complejos y optimizar la eficiencia empresarial.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: EXPERIENCIA -->
+    <section id="experiencia">
+        <div class="container">
+            <h2 class="section-title">Experiencia Profesional</h2>
+            
+            <div class="experience-grid">
+                <div class="experience-item">
+                    <h3>Ingeniero de Sistemas Senior</h3>
+                    <div class="company">Tech Solutions Corp.</div>
+                    <div class="period">2021 - Presente</div>
+                    <ul>
+                        <li>Desarrollo e implementación de sistemas empresariales escalables</li>
+                        <li>Análisis de datos con Python y visualización en Power BI</li>
+                        <li>Automatización de procesos mediante scripts y macros de Excel</li>
+                        <li>Liderazgo de equipos técnicos en proyectos de transformación digital</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Analista de Datos</h3>
+                    <div class="company">DataVision Analytics</div>
+                    <div class="period">2019 - 2021</div>
+                    <ul>
+                        <li>Creación de dashboards interactivos en Power BI para toma de decisiones</li>
+                        <li>Extracción y transformación de datos con Python (Pandas, NumPy)</li>
+                        <li>Elaboración de informes ejecutivos en Word y presentaciones en PowerPoint</li>
+                        <li>Optimización de bases de datos y consultas SQL</li>
+                    </ul>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Desarrollador Junior</h3>
+                    <div class="company">InnovateTech</div>
+                    <div class="period">2017 - 2019</div>
+                    <ul>
+                        <li>Desarrollo de aplicaciones web con tecnologías modernas</li>
+                        <li>Soporte técnico y mantenimiento de sistemas existentes</li>
+                        <li>Documentación técnica y manuales de usuario</li>
+                        <li>Trabajo colaborativo en equipos multidisciplinarios</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- HABILIDADES TÉCNICAS -->
+            <div class="skills-container">
+                <h3>Habilidades Técnicas</h3>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Programación</h4>
+                        <ul>
+                            <li>Python (Pandas, NumPy, Matplotlib)</li>
+                            <li>JavaScript / Node.js</li>
+                            <li>SQL / Bases de datos</li>
+                            <li>HTML / CSS</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Análisis de Datos</h4>
+                        <ul>
+                            <li>Power BI (Dashboards)</li>
+                            <li>Excel Avanzado (Macros, VBA)</li>
+                            <li>Tableau</li>
+                            <li>Google Analytics</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Office & Productividad</h4>
+                        <ul>
+                            <li>Microsoft Excel (Avanzado)</li>
+                            <li>Microsoft Word (Informes)</li>
+                            <li>PowerPoint (Presentaciones)</li>
+                            <li>Outlook / Teams</li>
+                        </ul>
+                    </div>
+
+                    <div class="skill-category">
+                        <h4>Otras Competencias</h4>
+                        <ul>
+                            <li>Metodologías Ágiles (Scrum)</li>
+                            <li>Git / Control de versiones</li>
+                            <li>Cloud Computing (AWS, Azure)</li>
+                            <li>Gestión de proyectos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: PROYECTOS -->
+    <section id="proyectos">
+        <div class="container">
+            <h2 class="section-title">Proyectos Destacados</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">📊</div>
+                    <div class="project-content">
+                        <h3>Dashboard Empresarial</h3>
+                        <p>
+                            Sistema integral de visualización de datos en Power BI que integra múltiples fuentes 
+                            para análisis en tiempo real, con indicadores KPI personalizados y reportes automatizados.
+                        </p>
+                        <a href="#" class="btn">Ver más</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🐍</div>
+                    <div class="project-content">
+                        <h3>Automatización con Python</h3>
+                        <p>
+                            Suite de scripts en Python para automatización de tareas repetitivas, procesamiento 
+                            masivo de datos y generación automática de informes en Excel y Word.
+                        </p>
+                        <a href="#" class="btn">Ver más</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">💼</div>
+                    <div class="project-content">
+                        <h3>Sistema de Gestión ERP</h3>
+                        <p>
+                            Desarrollo de módulos personalizados para sistema ERP empresarial, optimizando 
+                            procesos de inventario, facturación y reportes financieros con integración Excel.
+                        </p>
+                        <a href="#" class="btn">Ver más</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">📈</div>
+                    <div class="project-content">
+                        <h3>Análisis Predictivo</h3>
+                        <p>
+                            Modelo de machine learning en Python para predicción de ventas y análisis de tendencias, 
+                            con visualizaciones interactivas y reportes ejecutivos automatizados.
+                        </p>
+                        <a href="#" class="btn">Ver más</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🔧</div>
+                    <div class="project-content">
+                        <h3>Plataforma Web Corporativa</h3>
+                        <p>
+                            Sitio web responsivo con panel de administración, gestión de contenidos y 
+                            sistema de reportes integrado con herramientas de Office para documentación.
+                        </p>
+                        <a href="#" class="btn">Ver más</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">📑</div>
+                    <div class="project-content">
+                        <h3>Generador de Informes</h3>
+                        <p>
+                            Aplicación para generación automática de informes técnicos en Word y PowerPoint, 
+                            con plantillas personalizables y exportación de gráficos desde Excel y Power BI.
+                        </p>
+                        <a href="#" class="btn">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN: CONTACTO -->
+    <section id="contacto">
+        <div class="container">
+            <h2 class="section-title">Contacto</h2>
+            
+            <div class="contact-container">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="correo">Correo electrónico</label>
+                        <input type="email" id="correo" name="correo" required placeholder="tu@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensaje">Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-secondary">Enviar mensaje</button>
+                </form>
+
+                <div id="successMessage" class="success-message">
+                    ¡Mensaje enviado correctamente! Te contactaré pronto.
+                </div>
+
+                <!-- REDES SOCIALES -->
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/andres-mogollon" class="social-link linkedin" target="_blank">
+                        <span>🔗</span> LinkedIn
+                    </a>
+                    <a href="https://github.com/andresmogollon" class="social-link github" target="_blank">
+                        <span>💻</span> GitHub
+                    </a>
+                    <a href="https://x.com/andresmogollon" class="social-link twitter" target="_blank">
+                        <span>🐦</span> X (Twitter)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 Andrés Mogollón – Todos los derechos reservados</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // ============================================
+        // NAVEGACIÓN SUAVE
+        // ============================================
+        // Selecciona todos los enlaces del menú de navegación
+        document.querySelectorAll('nav a').forEach(anchor => {
+            // Añade un evento 'click' a cada enlace
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault(); // Evita el comportamiento por defecto del enlace
+                
+                // Obtiene el ID de la sección destino desde el atributo 'href'
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                // Hace scroll suave hasta la sección correspondiente
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // ============================================
+        // MANEJO DEL FORMULARIO DE CONTACTO
+        // ============================================
+        // Selecciona el formulario de contacto
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+
+        // Añade evento al enviar el formulario
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Evita que el formulario se envíe de forma tradicional
+            
+            // Captura los valores de los campos del formulario
+            const nombre = document.getElementById('nombre').value;
+            const correo = document.getElementById('correo').value;
+            const mensaje = document.getElementById('mensaje').value;
+            
+            // Muestra en consola los datos capturados (simulación de envío)
+            console.log('=== FORMULARIO ENVIADO CORRECTAMENTE ===');
+            console.log('Nombre:', nombre);
+            console.log('Correo:', correo);
+            console.log('Mensaje:', mensaje);
+            console.log('=======================================');
+            
+            // Muestra el mensaje de éxito en la página
+            successMessage.classList.add('show');
+            
+            // Limpia los campos del formulario
+            contactForm.reset();
+            
+            // Oculta el mensaje de éxito después de 5 segundos
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+        });
+
+        // ============================================
+        // ANIMACIÓN DE APARICIÓN AL HACER SCROLL
+        // ============================================
+        // Observador de intersección para animar elementos al entrar en el viewport
+        const observerOptions = {
+            threshold: 0.1, // Se activa cuando el 10% del elemento es visible
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Añade clase de animación cuando el elemento es visible
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Aplica la animación inicial a las tarjetas de proyecto
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Aplica la misma animación a los elementos de experiencia
+        document.querySelectorAll('.experience-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(item);
+        });
+
+        // ============================================
+        // BOTONES "VER MÁS" DE PROYECTOS
+        // ============================================
+        // Añade funcionalidad a los botones de cada proyecto
+        document.querySelectorAll('.project-card .btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Obtiene el título del proyecto desde la tarjeta padre
+                const projectTitle = this.parentElement.querySelector('h3').textContent;
+                
+                // Muestra información en consola (aquí podrías abrir un modal o nueva página)
+                console.log('Ver detalles del proyecto:', projectTitle);
+                alert(`Próximamente: Detalles completos de "${projectTitle}"`);
+            });
+        });
+
+        // ============================================
+        // EFECTO PARALLAX EN EL HEADER
+        // ============================================
+        // Añade efecto de movimiento al hacer scroll en la sección de presentación
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroContent = document.querySelector('.hero-content');
+            
+            if (heroContent && scrolled < window.innerHeight) {
+                // Mueve el contenido más lento que el scroll para efecto parallax
+                heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
+                heroContent.style.opacity = 1 - (scrolled / 600);
+            }
+        });
+
+        // ============================================
+        // MENSAJE DE BIENVENIDA EN CONSOLA
+        // ============================================
+        console.log('%c¡Bienvenido a mi portafolio!', 'color: #0066ff; font-size: 20px; font-weight: bold;');
+        console.log('%cAndrés Mogollón - Ingeniero de Sistemas', 'color: #ff6600; font-size: 14px;');
+        console.log('Si estás viendo esto, ¡eres una persona curiosa! 🚀');
+        console.log('Contáctame: LinkedIn, GitHub o X');
+    </script>
+</body>
+</html>
